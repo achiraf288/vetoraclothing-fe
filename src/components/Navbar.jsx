@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
@@ -30,7 +28,7 @@ export default function Navbar() {
           <img src="/vetora-logo.jpeg" alt="Vetora" className="h-8 w-8 rounded-sm object-cover" />
           <span className="font-display text-lg tracking-tightest">Vetora</span>
         </a>
-        <nav className="hidden md:flex items-center gap-10 text-sm">
+        <nav className="ml-auto md:ml-0 flex items-center gap-3 sm:gap-6 md:gap-10 text-xs sm:text-sm">
           <a href="#shop" className={`transition-colors ${linkColor}`}>Shop</a>
           <a href="/products" className={`transition-colors ${linkColor}`}>Products</a>
           <a href="#order" className={`transition-colors ${linkColor}`}>Order</a>
@@ -42,31 +40,8 @@ export default function Navbar() {
           >
             Shop now
           </a>
-          <button
-            type="button"
-            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-            className="md:hidden h-10 w-10 inline-flex flex-col items-center justify-center gap-1.5 rounded-full border border-bone/40 text-bone"
-          >
-            <span className="w-4 h-px bg-current" />
-            <span className="w-4 h-px bg-current" />
-          </button>
         </div>
       </div>
-      {menuOpen && (
-        <nav className="md:hidden flex flex-col gap-1 px-4 pb-4 bg-ink/95 backdrop-blur-md border-t border-line">
-          {[
-            ['Shop', '#shop'],
-            ['Products', '/products'],
-            ['Order', '#order'],
-          ].map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setMenuOpen(false)} className="py-3 text-sm text-bone/80 hover:text-bone">
-              {label}
-            </a>
-          ))}
-        </nav>
-      )}
     </header>
   )
 }
